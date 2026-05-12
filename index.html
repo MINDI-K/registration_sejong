@@ -499,11 +499,31 @@
     padding: 20px 0;
   }
 
-  /* Mobile */
+/* Mobile - 모바일에서 겹침 방지 수정 */
   @media (max-width: 600px) {
     .container { padding: 12px; }
-    .header { padding: 24px 20px; }
-    .header h1 { font-size: 20px; }
+    
+    .header { 
+      padding: 60px 20px 24px 20px; /* 위쪽 패딩을 늘려 버튼 공간 확보 */
+      text-align: left;
+    }
+
+    .lang-toggle {
+      top: 15px;
+      right: 15px;
+      scale: 0.9; /* 버튼 크기를 살짝 줄여서 공간 확보 */
+    }
+
+    .header-tag {
+      margin-top: 10px; /* 버튼 아래로 자연스럽게 내려오도록 조정 */
+      margin-bottom: 8px;
+    }
+
+    .header h1 { 
+      font-size: 20px; 
+      margin-top: 5px;
+    }
+    
     .form-section { padding: 20px 18px; }
     .info-box { grid-template-columns: 1fr; }
     .form-row.two-col { grid-template-columns: 1fr; }
