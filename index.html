@@ -529,36 +529,45 @@
     .form-row.two-col { grid-template-columns: 1fr; }
   }
 
-  /* 언어별 표시 제어 - 최종 최적화 */
+  /* 언어별 표시 제어 - 최종 수정본 */
   
-  /* 1. 모든 언어 요소 기본 숨김 */
+  /* 1. 모든 언어 요소 기본 숨김 (중요!) */
   [data-lang="ko"], [data-lang="en"], [data-lang="ru"] { 
-    display: none; 
+    display: none !important; 
   }
 
-  /* 2. 현재 선택된 언어만 표시 (인라인 요소) */
+  /* 2. 한국어 기본 표시 (또는 바디에 클래스가 없을 때) */
   body:not(.lang-en):not(.lang-ru) [data-lang="ko"],
-  body.lang-ko [data-lang="ko"],
-  body.lang-en [data-lang="en"],
-  body.lang-ru [data-lang="ru"] { 
-    display: inline; 
+  body.lang-ko [data-lang="ko"] { 
+    display: inline !important; 
   }
 
-  /* 3. 정보 박스(일시, 장소) 라벨 전용 제어 */
+  /* 3. 영어 모드일 때 */
+  body.lang-en [data-lang="en"] { 
+    display: inline !important; 
+  }
+
+  /* 4. 러시아어 모드일 때 */
+  body.lang-ru [data-lang="ru"] { 
+    display: inline !important; 
+  }
+
+  /* 5. 정보 박스(일시, 장소) 라벨 전용 제어 */
   .info-item .info-label [data-lang] {
-    display: none;
+    display: none !important;
   }
   
-  /* 선택된 언어의 라벨만 블록 형태로 표시 */
+  /* 라벨만 세로로 쌓이도록 설정 */
   body:not(.lang-en):not(.lang-ru) .info-item .info-label [data-lang="ko"],
+  body.lang-ko .info-item .info-label [data-lang="ko"],
   body.lang-en .info-item .info-label [data-lang="en"],
   body.lang-ru .info-item .info-label [data-lang="ru"] {
-    display: block; 
+    display: block !important; 
   }
 
-  /* 4. 러시아어 모드에서 일시/장소 값 줄바꿈 적용 */
+  /* 6. 러시아어일 때 실제 '값' 부분만 줄바꿈 (라벨 밑으로) */
   body.lang-ru .info-value span[data-lang="ru"] {
-    display: block;
+    display: block !important;
     margin-top: 4px;
   }
 </style>
