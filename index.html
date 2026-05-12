@@ -529,13 +529,39 @@
     .form-row.two-col { grid-template-columns: 1fr; }
   }
 
-  /* 언어별 표시 제어 */
-  [data-lang="en"], [data-lang="ru"] { display: none; }
-  body.lang-en [data-lang="ko"], body.lang-en [data-lang="ru"] { display: none; }
-  body.lang-en [data-lang="en"] { display: inline; }
-  body.lang-ru [data-lang="ko"], body.lang-ru [data-lang="en"] { display: none; }
-  body.lang-ru [data-lang="ru"] { display: inline; }
-</style>
+  /* 언어별 표시 제어 - 깔끔하게 수정된 버전 */
+  
+  /* 1. 모든 언어 요소 일단 숨김 */
+  [data-lang="ko"], [data-lang="en"], [data-lang="ru"] { 
+    display: none; 
+  }
+
+  /* 2. 한국어 (기본 설정) */
+  body:not(.lang-en):not(.lang-ru) [data-lang="ko"],
+  body.lang-ko [data-lang="ko"] { 
+    display: inline; 
+  }
+
+  /* 3. 영어 선택 시 */
+  body.lang-en [data-lang="en"] { 
+    display: inline; 
+  }
+
+  /* 4. 러시아어 선택 시 */
+  body.lang-ru [data-lang="ru"] { 
+    display: inline; 
+  }
+
+  /* 5. 정보 박스(일시, 장소) 라벨 전용 제어 (겹침 방지) */
+  .info-item .info-label [data-lang] {
+    display: none;
+  }
+  
+  body:not(.lang-en):not(.lang-ru) .info-item .info-label [data-lang="ko"],
+  body.lang-en .info-item .info-label [data-lang="en"],
+  body.lang-ru .info-item .info-label [data-lang="ru"] {
+    display: block; /* 일시/장소 라벨은 블록 형태로 깔끔하게 표시 */
+  }
 </head>
 <body>
 <div class="container">
